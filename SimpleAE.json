@@ -1,0 +1,16 @@
+{
+  "model": "SimpleAE",
+  "batch_size": 5,
+  "learning_rate": 0.005,
+
+  "model_config": {
+    "use_bias": true,
+
+    "encoder_nonlinearity": "leaky_relu",
+    "decoder_nonlinearity": "sigmoid",
+    "num_units": 4,
+    "input_dropout": 0.5,
+    "hidden_dropout": 0.5
+
+  }
+}
