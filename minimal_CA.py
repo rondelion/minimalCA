@@ -13,7 +13,7 @@ import logging
 import numpy as np
 
 import brica1
-import brica1.gym
+import brica1.brica_gym
 
 import torch
 import torch.nn.functional as F
@@ -238,7 +238,7 @@ if __name__ == '__main__':
             visual_model = None
         model.visual.model = visual_model
 
-    agent = brica1.gym.GymAgent(model, env)
+    agent = brica1.brica_gym.GymAgent(model, env)
     scheduler = brica1.VirtualTimeSyncScheduler(agent)
 
     for i in range( train["episode_count"]):
