@@ -1,0 +1,204 @@
+{
+ "Header": {
+  "Type": "A",
+  "Name": "minimalCA",
+  "Base": "minimalCA",
+  "Comment": "Minimal Cognitive Architecture with BriCA"
+ },
+ "Modules": [
+  {
+   "Name": "CognitiveArchitecture",
+   "Comment": "the whole:Convert light signals to neural coding",
+   "SubModules": [
+    "VisualComponent",
+    "MotorComponent"
+   ],
+   "Ports": [
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "observation",
+     "Type": "Input",
+     "Shape": [
+      4
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "action",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "Name": "VisualComponent",
+   "Comment": "Visual areas:Visual perception",
+   "ImplClass": "minimal_CA_1.ModeledVisualComponent",
+   "Ports": [
+    {
+     "Name": "in",
+     "Type": "Input",
+     "Shape": [
+      4
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "out",
+     "Type": "Output",
+     "Shape": [
+      4
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "Name": "MotorComponent",
+   "Comment": "Superior colliculus, motor related:Oculomotor output",
+   "ImplClass": "minimal_CA_1.MotorComponent",
+   "Ports": [
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "observation",
+     "Type": "Input",
+     "Shape": [
+      4
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "action",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  }
+ ],
+ "Connections": [
+  {
+   "Name": "CognitiveArchitecture-VisualComponent",
+   "FromModule": "CognitiveArchitecture",
+   "FromPort": "observation",
+   "ToModule": "VisualComponent",
+   "ToPort": "in"
+  },
+  {
+   "Name": "CognitiveArchitecture-VisualComponent",
+   "FromModule": "CognitiveArchitecture",
+   "FromPort": "token_in",
+   "ToModule": "VisualComponent",
+   "ToPort": "token_in"
+  },
+  {
+   "Name": "CognitiveArchitecture-MotorComponent",
+   "FromModule": "CognitiveArchitecture",
+   "FromPort": "reward",
+   "ToModule": "MotorComponent",
+   "ToPort": "reward"
+  },
+  {
+   "Name": "CognitiveArchitecture-MotorComponent",
+   "FromModule": "CognitiveArchitecture",
+   "FromPort": "done",
+   "ToModule": "MotorComponent",
+   "ToPort": "done"
+  },
+  {
+   "Name": "VisualComponent-MotorComponent",
+   "FromModule": "VisualComponent",
+   "FromPort": "out",
+   "ToModule": "MotorComponent",
+   "ToPort": "observation"
+  },
+  {
+   "Name": "VisualComponent-MotorComponent",
+   "FromModule": "VisualComponent",
+   "FromPort": "token_out",
+   "ToModule": "MotorComponent",
+   "ToPort": "token_in"
+  },
+  {
+   "Name": "MotorComponent-CognitiveArchitecture",
+   "FromModule": "MotorComponent",
+   "FromPort": "action",
+   "ToModule": "CognitiveArchitecture",
+   "ToPort": "action"
+  },
+  {
+   "Name": "MotorComponent-CognitiveArchitecture",
+   "FromModule": "MotorComponent",
+   "FromPort": "token_out",
+   "ToModule": "CognitiveArchitecture",
+   "ToPort": "token_out"
+  }
+ ]
+}
