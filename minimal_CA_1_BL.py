@@ -82,9 +82,9 @@ def main():
         visual_model.load_state_dict(torch.load(args.model))
         visual_model.eval()
         nb.unit_dic['minimalCA.VisualComponent'].device = device
+        nb.unit_dic['minimalCA.VisualComponent'].model = visual_model
     else:
-        visual_model = None
-    nb.unit_dic['minimalCA.VisualComponent'].model = visual_model
+        nb.unit_dic['minimalCA.VisualComponent'] = mca1.PipeVisualComponent()
 
     agent_builder = brical.AgentBuilder()
     model = nb.unit_dic['minimalCA.CognitiveArchitecture']
